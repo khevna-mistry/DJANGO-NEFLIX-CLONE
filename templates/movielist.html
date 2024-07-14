@@ -1,0 +1,828 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  {% load static %}
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="shortcut icon" href="{% static 'assets\favicon.png' %}" type="image/x-icon">
+<title>HOME</title>
+
+<style>
+  body, html {
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden; /* Prevent horizontal scrolling */
+    font-family: Arial, sans-serif;
+    background-color: #141414;
+  }
+
+  .slider-container {
+    width: 100vw; /* Full width of the viewport */
+    height: 700px; /* Full height of the viewport */
+    display: flex;
+    margin-right:20px;
+  }
+
+  .slider {
+    display: flex;
+    transition: transform 0.5s ease;
+  }
+
+  .slide {
+    flex: 0 0 100vw; /* Each slide takes up the full width of the viewport */
+   height: 700px; /* Full height of the viewport */
+  }
+
+ .slide img {
+    width: 100%;
+    height: 100%;
+    object-fit: fill; /* Ensure images cover the entire slide */
+  }
+    .navbar {
+     background: transparent;
+    padding: 20px;
+   
+	width:100vw;
+  }
+
+  .navbar ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .navbar li {
+    display: inline-block;
+    margin-right: 20px;
+  }
+
+  .navbar li:last-child {
+    margin-right: 0;
+  }
+
+  .navbar a {
+    text-decoration: none;
+    color: #fff;
+    font-size: 15px; /* Larger font size for TV screens */
+    padding: 10px 20px;
+    transition: transform 0.3s ease;
+
+  }
+
+  .navbar a:hover {
+    transform: scale(1.1);  /* Darker background on hover */
+  }
+.card-listbar {
+    width: 100%; /* Adjust the width as needed */
+    white-space: nowrap; /* Keep all slides in a single line */
+    padding-left: 0px;
+    background-color: #141414;
+  }
+
+  .card {
+    display: inline-block;
+    margin-left:20px;
+  }
+
+  .card img {
+    width: 200px; /* Adjust the width of each image */
+    height: 350px; /* Maintain aspect ratio */
+    cursor: pointer;
+    transition: transform 0.3s ease;
+    border-radius:15px;
+    object-fit: cover;
+  }
+
+  .card img:hover {
+    transform: scale(1.1); /* Scale up image on hover */
+  }
+.titleofcards
+{
+text-align: left;
+font-family: Arial, sans-serif;
+color: #fff;
+font-weight:bold;
+font-size:25px;
+margin-left:30px;
+}
+.wrapper {
+ display: grid;
+ grid-template-columns: repeat(3, 100%);
+ overflow: hidden;
+ scroll-behavior: smooth;
+}
+.wrapper section {
+ background-color: #141414;
+ position: relative;
+ display: grid;
+ grid-template-columns: repeat(7, auto);
+ margin: 20px 0;
+ 
+ height:350px;
+}
+.wrapper section .item {
+ padding: 0 2px;
+ transition: 250ms all;
+}
+.wrapper section a {
+    position: absolute;
+    color: #fff;
+    text-decoration: none;
+    font-size: 6em;
+    background: black;
+    width: 80px;
+    
+    text-align: center;
+    z-index: 1;
+}
+@media only screen and (max-width: 600px) {
+    a.arrow__btn {
+        display: none;
+    }
+}
+a:-webkit-any-link {
+       cursor: pointer;
+}
+.wrapper section a:nth-of-type(2) {
+ top: 0;
+ bottom: 0;
+ right: 0;
+ background: linear-gradient(90deg, rgba(0, 0, 0, 0) 0%, black 100%);
+}
+ .wrapper section a:nth-of-type(1) {
+    top: 0;
+    bottom: 0;
+    left: 0;
+    background: linear-gradient(-90deg, rgba(0, 0, 0, 0) 0%, black 100%);
+}
+.flexbox {
+  background:transparent;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: right;
+  align-items: top;
+
+
+}
+
+.search 
+{
+  margin-right: 10px;
+}
+.search > div 
+{
+  display: inline-block;
+  position: relative;
+  filter: drop-shadow(0 1px #0091c2);
+}
+.search > div:after {
+  content: "";
+  background: white;
+  width: 4px;
+  height: 10px;
+  position: absolute;
+  top: 23px;
+  right: 1px;
+  transform: rotate(142deg);
+}
+.search > div > input {
+  color: white;
+  font-size: 16px;
+  background: transparent;
+  width: 1px;
+  height: 1px;
+  padding: 10px;
+  border: solid 3px white;
+  outline: none;
+  border-radius: 35px;
+  transition: width 0.5s;
+}
+
+.search > div > input::placeholder {
+  color: #efefef;
+  opacity: 0;
+  transition: opacity 150ms ease-in-out;
+}
+
+.search > div > input:focus::placeholder {
+  opacity: 1;
+}
+
+.search > div > input:focus,
+.search > div > input:not(:placeholder-shown) {
+  width: 250px;
+}
+.imgdiv
+{
+    
+    
+    background-size: cover;
+    background-position: center;
+    padding: 10px 8%;
+    position: relative;
+
+}
+nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 0;
+}
+
+.logo {
+    width: 150px;
+    cursor: pointer;
+}
+
+@media only screen and (max-width: 600px) {
+    .logo {
+        width: 100px;
+    }
+}
+</style>
+</head>
+<body>
+{% block content %}
+<form method="post">
+  {% csrf_token %}
+<header>
+<div class="headerr">
+<div class="imgdiv">
+        <nav>
+            <img class="logo" src="{%static 'image\logo.png'%}"  alt="logo">
+            <div>
+  <div class="navbar">
+    <ul>
+     <li><div class="flexbox">
+    	<div class="search">
+        	<div>
+      			<input type="text" placeholder="Search . . .">
+    		</div>
+ 	 </div>
+   </div></li>
+</ul>
+</div>
+</div>
+</header>
+<div class="slider-container">
+  <div class="slider">
+    <div class="slide">
+      <img src="{%static 'image\AVATAR.jpeg'%}">
+    </div>
+    <div class="slide">
+      <img src="{%static 'image\xman.jpg'%}">
+    </div>
+	<div class="slide">
+      <img src="{%static 'image\goblin.jpg'%}">
+    </div>
+    <div class="slide">
+      <img src="{%static 'image\avengers.jpeg'%}">
+    </div>
+    </div>
+  </div>
+</div>
+
+
+
+<!..................................kdrama....................>
+
+
+
+
+
+
+<div class="titleofcards">
+<p>K-Dramas for Beginners</p>
+</div>
+<div class="card-listbar">
+    <div class="wrapper">
+        <section id="section1">
+           
+{% for movie in movies %}
+    <a href="{% url 'netflixapp:movie-detail' movie_id=movie.uuid %}">
+    <div class="card">
+        <img src="{{movie.image.url}}" alt="">
+    </div>
+    </a>
+{% endfor %}
+<a href="#section3" class="arrow__btn">‹</a>
+<div class="card">
+<img src="{%static 'kdrama\ALLOFUSAREDEAD.jpeg' %}">
+  </div>
+  <div class="card">
+    <img src="{%static 'kdrama\ACTION\MYNAME.jpg'%}">
+  </div>
+ <div class="card">
+  <img src="{%static 'kdrama\NEVERTHELESS,.jpg'%}">
+  </div>
+  <div class="card">
+    <img src="{%static 'kdrama\LOVEALARM.jpg'%}">
+  </div>
+  <div class="card">
+    <img src="{%static 'kdrama\Fabulous.jpeg'%}">
+  </div>
+  <a href="#section2" class="arrow__btn">›</a>
+ </section>
+ <section id="section2">
+ <a href="#section1" class="arrow__btn">‹</a>
+  <div class="card">
+    <img src="{%static 'kdrama\TOMMOROW.jpg'%}">
+  </div>
+  <div class="card">
+    <img src="{%static 'kdrama\RECORDOFYOUTH.jpg'%}">
+  </div>
+  <div class="card">
+    <img src="{%static 'kdrama\SQUIDGAME.jpeg'%}">
+  </div>
+ <div class="card">
+  <img src="{%static 'kdrama\Strong_girl_DO_Bong_soon.jpeg'%}">
+  </div>
+  <div class="card">
+    <img src="{%static 'kdrama\TRUEBEAUTY.jpg'%}">
+  </div>
+  <div class="card">
+    <img src="{%static 'kdrama\LOVESTRUCKINTHECITY.jpg'%}">
+  </div>
+ <a href="#section3" class="arrow__btn">›</a>
+ </section>
+<section id="section3">
+ <a href="#section2" class="arrow__btn">‹</a>
+  <div class="card">
+    <img src="{%static 'kdrama\KINGDOM2.jpg'%}">
+  </div>
+  <div class="card">
+    <img src="{%static '\kdrama\Hotel_Del_Luna Kdrama.jpeg'%}">
+  </div>
+  <div class="card">
+    <img src="{%static 'kdrama\EXTRAORDINARYATTORNEYWOO.jpg'%}">
+  </div>
+ <div class="card">
+  <img src="{%static 'kdrama\ROMANTIC\business_proposal.jpg'%}">
+  </div>
+  <div class="card">
+    <img src="{%static 'kdrama\ROMANTIC\its_ok_to_not_be_ok.jpg'%}">
+  </div>
+  <div class="card">
+    <img src="{%static 'kdrama\ROMANTIC\snowdrop.jpg'%}">
+  </div>
+ <a href="#section1" class="arrow__btn">›</a>
+ </section>
+ </div>
+
+
+
+
+
+<!..................................indian moviesss........>
+
+
+
+
+
+<div class="titleofcards">
+<p>INDIAN MOVIES</p>
+</div>
+<div class="card-listbar">
+<div class="wrapper">
+<section id="section6">
+<a href="#section8" class="arrow__btn">‹</a>
+  <div class="card">
+    <img src="{%static 'indian\ACTION\sehzade.jpeg'%}">
+  </div>
+  <div class="card">
+    <img src="{%static 'indian\ACTION\KHUDA_HAFIS.jpg'%}">
+  </div>
+  <div class="card">
+    <img src="{%static 'indian\ACTION\maharshi.jpg'%}">
+  </div>
+ <div class="card">
+  <img src="{%static 'indian\ACTION\KGF.jpg'%}">
+  </div>
+  <div class="card">
+    <img src="{%static 'indian\ACTION\JUNGLEE.jpg'%}">
+  </div>
+  <div class="card">
+    <img src="{%static 'indian\COMEDY\3_Idiots.jpg'%}">
+  </div>
+  <a href="#section7" class="arrow__btn">›</a>
+ </section>
+ <section id="section7">
+ <a href="#section6" class="arrow__btn">‹</a>
+  <div class="card">
+    <img src="{%static 'indian\ACTION\makkhi.jpg'%}">
+  </div>
+  <div class="card">
+    <img src="{%static 'indian\ACTION\LEO.jpg'%}">
+  </div>
+  <div class="card">
+    <img src="{%static 'indian\COMEDY\angrezi_medium.jpg'%}">
+  </div>
+ <div class="card">
+  <img src="{%static 'indian\Adventure\Brahmastra1.jpg'%}">
+  </div>
+  <div class="card">
+    <img src="{%static 'indian\Adventure\Fighter.jpg'%}">
+  </div>
+  <div class="card">
+    <img src="{%static 'indian\COMEDY\bareilly_ki_barfi.jpg'%}">
+  </div>
+ <a href="#section8" class="arrow__btn">›</a>
+ </section>
+<section id="section8">
+ <a href="#section7" class="arrow__btn">‹</a>
+  <div class="card">
+    <img src="{%static 'indian\COMEDY\chennai_express.jpg'%}">
+  </div>
+  <div class="card">
+    <img src="{%static 'indian\COMEDY\de_de_pyaar_de.jpg'%}">
+  </div>
+  <div class="card">
+    <img src="{%static 'indian\COMEDY\happy_new_year.jpg'%}">
+  </div>
+ <div class="card">
+  <img src="{%static 'indian\COMEDY\omg.jpg'%}">
+  </div>
+  <div class="card">
+    <img src="{%static 'indian\COMEDY\yeh_jawaani_hai_deewani.jpg'%}">
+  </div>
+  <div class="card">
+    <img src="{%static 'indian\COMEDY\JAILER.jpg'%}">
+  </div>
+ <a href="#section6" class="arrow__btn">›</a>
+ </section>
+  </div>
+
+
+
+
+
+<!.......................HOLLYWOOD..............>
+
+
+
+
+
+<div class="titleofcards">
+<p>HOLLYWOOD MOVIES</p>
+</div>
+<div class="card-listbar">
+<div class="wrapper">
+<section id="section9">
+<a href="#section11" class="arrow__btn">‹</a>
+<div class="card">
+  <img src="{%static 'hollywood\ACTION\DARK_PHOENIX.jpg'%}">
+</div>
+<div class="card">
+  <img src="{%static 'hollywood\13_REASONS_WHY.jpg'%}">
+</div>
+<div class="card">
+  <img src="{%static 'hollywood\ALADDIN.jpg'%}">
+</div>
+<div class="card">
+<img src="{%static 'hollywood\CINDERELLA.jpg'%}">
+</div>
+<div class="card">
+  <img src="{%static 'hollywood\DEMSEL.jpg'%}">
+</div>
+<div class="card">
+  <img src="{%static 'hollywood\DIVERGENT.jpg'%}">
+</div>
+  <a href="#section10" class="arrow__btn">›</a>
+ </section>
+ <section id="section10">
+ <a href="#section9" class="arrow__btn">‹</a>
+ <div class="card">
+  <img src="{%static 'hollywood\ENOLA_HOLMES.jpg'%}">
+</div>
+<div class="card">
+  <img src="{%static 'hollywood\FANTASTIC_BEASTS.jpg'%}">
+</div>
+<div class="card">
+  <img src="{%static 'hollywood\FATE.jpg'%}">
+</div>
+<div class="card">
+<img src="{%static 'hollywood\JUMANJI.jpg'%}">
+</div>
+<div class="card">
+  <img src="{%static 'hollywood\LEGACIES.jpg'%}">
+</div>
+<div class="card">
+  <img src="{%static 'hollywood\LION_KING.jpg'%}">
+</div>
+ <a href="#section11" class="arrow__btn">›</a>
+ </section>
+<section id="section11">
+ <a href="#section10" class="arrow__btn">‹</a>
+ <div class="card">
+  <img src="{%static 'hollywood\STRANGERS_THING.jpg'%}">
+</div>
+<div class="card">
+  <img src="{%static 'hollywood\Adventure\kong_skull_island_ver3.jpg'%}">
+</div>
+<div class="card">
+  <img src="{%static 'hollywood\THE_5_WAVE.jpg'%}">
+</div>
+<div class="card">
+<img src="{%static 'hollywood\TITENICE.jpg'%}">
+</div>
+<div class="card">
+  <img src="{%static 'hollywood\TWILIGHT_1.jpg'%}">
+</div>
+<div class="card">
+  <img src="{%static 'hollywood\TWILIGHT(NEW MOON)2.jpg'%}">
+</div>
+ <a href="#section9" class="arrow__btn">›</a>
+ </section>
+  </div>
+
+
+
+
+<!......................CHINESE...............................>
+
+
+
+
+
+<div class="titleofcards">
+<p>CHINESE</p>
+</div>
+<div class="card-listbar">
+<div class="wrapper">
+<section id="section12">
+<a href="#section14" class="arrow__btn">‹</a>
+<div class="card">
+  <img src="{%static 'chinese\ROMANTIC\A_Love_So_Beautiful.jpg'%}">
+</div>
+<div class="card">
+  <img src="{%static 'chinese\ROMANTIC\Accidentally_in_Love.jpg'%}">
+</div>
+<div class="card">
+  <img src="{%static 'chinese\ROMANTIC\Cute_Programmer.jpg'%}">
+</div>
+<div class="card">
+<img src="{%static 'chinese\ROMANTIC\Everyone_Loves_Me.jpg'%}">
+</div>
+<div class="card">
+  <img src="{%static 'chinese\ROMANTIC\Hidden_Love1.jpg'%}">
+</div>
+<div class="card">
+  <img src="{%static 'chinese\ROMANTIC\Love_Crossed.jpg'%}">
+</div>
+  <div class="card">
+    <img src="{%static 'chinese\ROMANTIC\Love_Designer.jpg'%}">
+  </div>
+  <a href="#section13" class="arrow__btn">›</a>
+ </section>
+ <section id="section13">
+ <a href="#section12" class="arrow__btn">‹</a>
+ <div class="card">
+  <img src="{%static 'chinese\ROMANTIC\love_is_sweet.jpg'%}">
+</div>
+<div class="card">
+  <img src="{%static 'chinese\ROMANTIC\Love_O2O.jpg'%}">
+</div>
+<div class="card">
+  <img src="{%static 'chinese\ROMANTIC\Meteor_Garden.jpg'%}">
+</div>
+<div class="card">
+<img src="{%static 'chinese\ROMANTIC\MyGirlfriendIsanAlien.jpg'%}">
+</div>
+<div class="card">
+  <img src="{%static 'chinese\ROMANTIC\PutYourHeadonMyShoulder.jpg'%}">
+</div>
+<div class="card">
+  <img src="{%static 'chinese\ROMANTIC\You_Are_My_Glory1.jpg'%}">
+</div>
+ <a href="#section14" class="arrow__btn">›</a>
+ </section>
+<section id="section14">
+ <a href="#section13" class="arrow__btn">‹</a>
+ <div class="card">
+  <img src="{%static 'chinese\drama\The_Whirlwind_Girl.jpg'%}">
+</div>
+<div class="card">
+  <img src="{%static 'chinese\drama\My_Unicorn_Girl.jpg'%}">
+</div>
+<div class="card">
+  <img src="{%static 'chinese\drama\Mr_Bad.jpg'%}">
+</div>
+<div class="card">
+<img src="{%static 'chinese\drama\Love_Th_Way_You_Are.jpg'%}">
+</div>
+<div class="card">
+  <img src="{%static 'chinese\drama\Everyone_Loves_Me.jpg'%}">
+</div>
+<div class="card">
+  <img src="{%static 'chinese\COMEDY\GO_go_squid!.jpg'%}">
+</div>
+ <a href="#section12" class="arrow__btn">›</a>
+ </section>
+  </div>
+
+
+
+
+
+
+
+  <!..............................ANIME...............................>
+
+
+
+
+
+<div class="titleofcards">
+<p>ANIME</p>
+</div>
+<div class="card-listbar">
+<div class="wrapper">
+<section id="section15">
+<a href="#section17" class="arrow__btn">‹</a>
+<div class="card">
+  <img src="{%static 'japanese\anime_world\A_Silent_Voice_The_Movie_2016.jpg'%}">
+</div>
+<div class="card">
+  <img src="{%static 'japanese\anime_world\a_whisker_away.jpg'%}">
+</div>
+<div class="card">
+  <img src="{%static 'japanese\anime_world\Black_Clov_r Sword_of_the_Wizard_King.jpg'%}">
+</div>
+<div class="card">
+<img src="{%static 'japanese\anime_world\bubble.jpg'%}">
+</div>
+<div class="card">
+  <img src="{%static 'japanese\anime_world\Dragon_Ball_Super_Broly_2018.jpg'%}">
+</div>
+<div class="card">
+  <img src="{%static 'japanese\anime_world\jujutsu_kaisen.jpg'%}">
+</div>
+  <div class="card">
+    <img src="{%static 'japanese\anime_world\Spirited_Away_2001.jpg'%}">
+  </div>
+  <a href="#section16" class="arrow__btn">›</a>
+ </section>
+
+ <section id="section16">
+ <a href="#section15" class="arrow__btn">‹</a>
+ <div class="card">
+  <img src="{%static 'japanese\anime_world\summer_ghost_anime.jpg'%}">
+</div>
+<div class="card">
+  <img src="{%static 'japanese\anime_world\suzume.jpg'%}">
+</div>
+<div class="card">
+<img src="{%static 'japanese\anime_world\your_name.jpg'%}">
+</div>
+<div class="card">
+  <img src="{%static 'japanese\anime_world\demon_slayer.jpg'%}">
+</div>
+<div class="card">
+  <img src="{%static 'japanese\anime_world\Black_Clov_r Sword_of_the_Wizard_King.jpg'%}">
+</div>
+<div class="card">
+  <img src="{%static 'japanese\anime_world\The_ Boy_and_the_Heron.jpg'%}">
+</div>
+<div class="card">
+  <img src="{%static 'japanese\anime_world\the_garden_of_the_world.jpg'%}">
+</div>
+<a href="#section17" class="arrow__btn">›</a>
+ </section>
+<section id="section17">
+ <a href="#section16" class="arrow__btn">‹</a>
+ <div class="card">
+  <img src="{%static 'japanese\anime_world\i_want_to_eat_your_pancrease.jpg'%}">
+</div>
+<div class="card">
+  <img src="{%static 'japanese\anime_world\my_happy_marriage.jpg'%}">
+</div>
+<div class="card">
+  <img src="{%static 'japanese\anime_world\spy_family.jpg'%}">
+</div>
+<div class="card">
+<img src="{%static 'japanese\anime_world\naruto.jpg'%}">
+</div>
+<div class="card">
+  <img src="{%static 'japanese\anime_world\naruto_shippuden.jpg'%}">
+</div>
+<div class="card">
+  <img src="{%static 'japanese\anime_world\fruites_basket.jpg'%}">
+</div>
+ <a href="#section15" class="arrow__btn">›</a>
+ </section>
+  </div>
+
+
+
+
+
+
+
+  <!..............................ADVENTURE...............................>
+
+
+
+
+
+<div class="titleofcards">
+<p>ADVENTURE</p>
+</div>
+<div class="card-listbar">
+<div class="wrapper">
+<section id="section18">
+<a href="#section20" class="arrow__btn">‹</a>
+<div class="card">
+  <img src="{%static 'hollywood\Adventure\DEMSEL.jpg'%}">
+</div>
+<div class="card">
+  <img src="{%static 'hollywood\Adventure\Journey_to_the_Center_of_the_Earth_2.jpg'%}">
+</div>
+<div class="card">
+  <img src="{%static 'indian\Adventure\Thugs_of_Hindostan.jpg'%}">
+</div>
+<div class="card">
+<img src="{%static 'kdrama\Adventure\The_Uncanny_Counter.jpeg'%}">
+</div>
+<div class="card">
+  <img src="{%static 'kdrama\Adventure\Tale_of_the_Nine_Tailed.jpeg'%}">
+</div>
+<div class="card">
+  <img src="{%static 'hollywood\Adventure\king_kong.jpg'%}">
+</div>
+  <div class="card">
+    <img src="{%static 'indian\Adventure\ram_setu.jpg'%}">
+  </div>
+  <a href="#section19" class="arrow__btn">›</a>
+ </section>
+
+ <section id="section19">
+ <a href="#section18" class="arrow__btn">‹</a>
+ <div class="card">
+  <img src="{%static 'indian\Adventure\Fighter.jpg'%}">
+</div>
+<div class="card">
+  <img src="{%static 'kdrama\Adventure\Mr_Queen.jpeg'%}">
+</div>
+<div class="card">
+<img src="{%static 'hollywood\Adventure\Jumanji_Welcome_to_the_Jungle.jpg'%}">
+</div>
+<div class="card">
+  <img src="{%static 'kdrama\Adventure\Sweet_Home.jpeg'%}">
+</div>
+<div class="card">
+  <img src="{%static 'kdrama\Adventure\Tale_of_the_Nine_Tailed.jpeg'%}">
+</div>
+<div class="card">
+  <img src="{%static 'kdrama\Adventure\W_Two_Worlds.jpeg'%}">
+</div>
+<div class="card">
+  <img src="{%static 'kdrama\Adventure\Tomorrow.jpeg'%}">
+</div>
+<a href="#section20" class="arrow__btn">›</a>
+ </section>
+<section id="section20">
+ <a href="#section19" class="arrow__btn">‹</a>
+ <div class="card">
+  <img src="{%static 'thai\Adventure\Immortal_Species_2023.jpg.jpg'%}">
+</div>
+<div class="card">
+  <img src="{%static 'thai\Adventure\Khun_Phaen_Begins_2019.jpg'%}">
+</div>
+<div class="card">
+  <img src="{%static 'thai\Adventure\Mantra Warrior The Legend of the Eight Moons 2023.jpg'%}">
+</div>
+<div class="card">
+<img src="{%static 'kdrama\Adventure\Mr_Queen.jpeg'%}">
+</div>
+<div class="card">
+  <img src="{%static 'thai\Adventure\The_Adventures_2023.jpg'%}">
+</div>
+<div class="card">
+  <img src="{%static 'thai\Adventure\The_Beast_Below_2022.jpg'%}">
+</div>
+ <a href="#section18" class="arrow__btn">›</a>
+ </section>
+  </div>
+
+
+<script>
+  const slider = document.querySelector('.slider');
+  const slides = document.querySelectorAll('.slide');
+  let currentSlide = 0;
+
+  function goToSlide(index) {
+    slider.style.transform = `translateX(-${index * 100}vw)`;
+  }
+
+  function nextSlide() {
+    currentSlide = (currentSlide + 1) % slides.length;
+    goToSlide(currentSlide);
+  }
+
+  setInterval(nextSlide, 3000); // Change slide every 3 seconds
+</script>
+</form>
+{% endblock content %}
+</body>
+</html>
