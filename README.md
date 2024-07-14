@@ -1,5 +1,15 @@
 # Screeshot:
 ![image](https://github.com/user-attachments/assets/32686ba1-9484-4318-a16b-4a36f2d67123)
+![image](https://github.com/user-attachments/assets/8a6c2d32-1d0f-4ddb-b11f-7a82bfc93d02)
+![image](https://github.com/user-attachments/assets/27ce9313-2232-48b3-8c69-1005d20b05b9)
+![image](https://github.com/user-attachments/assets/79afa080-d047-4769-9258-61d0a8b36025)
+![image](https://github.com/user-attachments/assets/ba365299-d877-4bac-b650-7c805eeeb87a)
+
+# Admin Panel:
+![image](https://github.com/user-attachments/assets/84dc56af-f7d3-4c9f-bbd9-1200e7b94092)
+![image](https://github.com/user-attachments/assets/b9094fc3-270e-4947-9709-da298d2dd049)
+![image](https://github.com/user-attachments/assets/7ffe50d3-cee0-42a2-9115-71cdaebbb31c)
+
 
 
 # 💫 About Me:
